@@ -1,0 +1,16 @@
+/* Progressive Entropy Base Styles */
+
+html.entropilo-active {
+  /* Pre-define transition properties for jitter-free degradation */
+  transition: filter 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html.entropilo-active body {
+  will-change: filter;
+}
+
+/* Ensure critical interactive buttons on host page aren't accidentally hidden */
+html.entropilo-active a,
+html.entropilo-active button {
+  transition: opacity 0.3s ease;
+}

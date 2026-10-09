@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EchoNet — Entropilo Social Feed Simulator</title>
+  
+  <!-- Entropilo styles -->
+  <link rel="stylesheet" href="../content/styles/content-isolated.css">
+  <link rel="stylesheet" href="../content/styles/entropy.css">
+  <link rel="stylesheet" href="simulator.css">
+</head>
+<body>
+  <!-- Top Navigation -->
+  <nav class="sim-navbar">
+    <div class="sim-nav-container">
+      <div class="sim-nav-left">
+        <div class="sim-logo">
+          <span class="sim-logo-icon">🪞</span>
+          <span class="sim-logo-text">EchoNet</span>
+        </div>
+        <span class="sim-badge">Test Sandbox</span>
+      </div>
+
+      <div class="sim-search-bar">
+        <span class="sim-search-icon">🔍</span>
+        <input type="text" placeholder="Search EchoNet (e.g. hackathon results)..." id="sim-search-input">
+      </div>
+
+      <div class="sim-nav-right">
+        <button type="button" class="sim-btn-profile">@developer</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Feed Layout -->
+  <main class="sim-layout">
+    <!-- Left Sidebar -->
+    <aside class="sim-sidebar">
+      <div class="sim-menu-item active">🏠 Home Timeline</div>
+      <div class="sim-menu-item">🔥 Trending</div>
+      <div class="sim-menu-item">🔔 Notifications</div>
+      <div class="sim-menu-item">🔖 Bookmarks</div>
+      <div class="sim-menu-item">⚙️ Settings</div>
+
+      <div class="sim-demo-card">
+        <h3>💡 Demo Scenario</h3>
+        <p>1. Stated Goal: <em>"Check hackathon results"</em></p>
+        <p>2. Try scrolling down fast without clicking anything.</p>
+        <p>3. Notice color desaturate as the Fugue Engine detects mindless scrolling.</p>
+        <p>4. The Behavioral Mirror will appear in the feed!</p>
+      </div>
+    </aside>
+
+    <!-- Center Timeline -->
+    <section class="sim-timeline" id="feed-container" role="feed">
+      <!-- Composer Box -->
+      <div class="sim-composer">
+        <div class="sim-composer-avatar">🧑‍💻</div>
+        <div class="sim-composer-body">
+          <input type="text" placeholder="What's happening in tech?" class="sim-composer-input">
+          <div class="sim-composer-actions">
+            <button type="button" class="sim-btn-post">Post</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feed Posts Container -->
+      <div id="posts-stream" class="sim-posts-stream">
+        <!-- Dynamic posts will be generated here -->
+      </div>
+
+      <!-- Infinite Scroll Trigger -->
+      <div id="infinite-scroll-trigger" class="sim-loading-sentinel">
+        <div class="sim-spinner"></div>
+        <span>Loading more posts...</span>
+      </div>
+    </section>
+
+    <!-- Right Sidebar -->
+    <aside class="sim-sidebar-right">
+      <div class="sim-trends-card">
+        <h3>Trends for you</h3>
+        <div class="trend-item">
+          <span class="trend-cat">Technology • Trending</span>
+          <strong>#HackathonFinals2026</strong>
+          <span class="trend-count">42.5K posts</span>
+        </div>
+        <div class="trend-item">
+          <span class="trend-cat">AI Research • Trending</span>
+          <strong>Autonomous Agents</strong>
+          <span class="trend-count">128.1K posts</span>
+        </div>
+        <div class="trend-item">
+          <span class="trend-cat">Browser Extensions • Trending</span>
+          <strong>Entropilo Launch</strong>
+          <span class="trend-count">18.9K posts</span>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Entropilo Content Script Core -->
+  <script src="../content/site-adapters/adapter-base.js"></script>
+  <script src="../content/site-adapters/generic-adapter.js"></script>
+  <script src="../content/site-adapters/twitter-adapter.js"></script>
+  <script src="../content/site-adapters/youtube-adapter.js"></script>
+  <script src="../content/fugue-engine.js"></script>
+  <script src="../content/entropy-engine.js"></script>
+  <script src="../content/intent-contract.js"></script>
+  <script src="../content/behavioral-mirror.js"></script>
+  <script src="../content/content.js"></script>
+  
+  <!-- Simulator post feed generator -->
+  <script src="simulator.js"></script>
+</body>
+</html>

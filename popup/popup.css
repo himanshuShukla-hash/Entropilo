@@ -1,0 +1,323 @@
+/* Entropilo Popup Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  width: 360px;
+  background: #0f172a;
+  color: #f8fafc;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.popup-container {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Header */
+.popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+}
+
+.brand-text h1 {
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+}
+
+.brand-subtitle {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.status-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 4px 8px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #10b981;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+}
+
+/* Base Card */
+.card {
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.card-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.btn-text {
+  background: none;
+  border: none;
+  color: #818cf8;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-text:hover {
+  text-decoration: underline;
+}
+
+/* Intent Card */
+.intent-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #38bdf8;
+  word-break: break-word;
+}
+
+/* Score Card */
+.score-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.stage-tag {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(99, 102, 241, 0.15);
+  color: #818cf8;
+}
+
+.score-display {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.score-number-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.score-value {
+  font-size: 26px;
+  font-weight: 800;
+  color: #10b981;
+}
+
+.score-max {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.progress-bar-wrap {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: #10b981;
+  border-radius: 9999px;
+  transition: width 0.4s ease, background-color 0.4s ease;
+}
+
+.score-desc {
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+/* Signals Grid */
+.signals-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.signal-item {
+  background: rgba(15, 23, 42, 0.6);
+  border-radius: 8px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.signal-val {
+  font-size: 14px;
+  font-weight: 700;
+  color: #f1f5f9;
+}
+
+.signal-name {
+  font-size: 10px;
+  color: #94a3b8;
+}
+
+/* Buttons */
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  flex: 1;
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.btn-primary {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background: #dc2626;
+}
+
+/* Simulator Launcher */
+.btn-simulator {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.2) 0%, rgba(99, 102, 241, 0.1) 100%);
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: #f8fafc;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.btn-simulator:hover {
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.35) 0%, rgba(99, 102, 241, 0.2) 100%);
+  border-color: rgba(99, 102, 241, 0.6);
+  transform: translateY(-1px);
+}
+
+.sim-icon {
+  font-size: 20px;
+}
+
+.sim-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.sim-text strong {
+  font-size: 12px;
+  color: #818cf8;
+}
+
+.sim-text span {
+  font-size: 10px;
+  color: #94a3b8;
+}
+
+/* Settings */
+.settings-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.setting-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #cbd5e1;
+}
+
+.setting-row select {
+  background: #0f172a;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  color: #f1f5f9;
+  padding: 4px 8px;
+  font-size: 11px;
+  outline: none;
+}
+
+.setting-row input[type="checkbox"] {
+  accent-color: #6366f1;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+.popup-footer {
+  text-align: center;
+  font-size: 10px;
+  color: #64748b;
+  padding-top: 4px;
+}
