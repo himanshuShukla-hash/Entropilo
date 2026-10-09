@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entropilo — Project Presentation Deck</title>
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --card-bg: #111827;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --accent: #6366f1;
+      --accent-glow: rgba(99, 102, 241, 0.25);
+      --danger: #ef4444;
+      --success: #10b981;
+      --border: rgba(255, 255, 255, 0.08);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+    }
+    .controls {
+      position: sticky;
+      top: 16px;
+      z-index: 100;
+      background: rgba(17, 24, 39, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      padding: 10px 24px;
+      border-radius: 9999px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+    .controls button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 9999px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.2s;
+    }
+    .controls button:hover {
+      background: #4f46e5;
+    }
+    .controls span {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .slide-deck {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      width: 100%;
+      max-width: 980px;
+    }
+    .slide {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 48px;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+      position: relative;
+      overflow: hidden;
+    }
+    .slide::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), #38bdf8, var(--success));
+    }
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+    }
+    .tag {
+      background: rgba(99, 102, 241, 0.15);
+      color: #818cf8;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      padding: 4px 12px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .slide-num {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    h1 {
+      font-size: 34px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    h2 {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    p.lead {
+      font-size: 16px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 780px;
+    }
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+    .content-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      padding: 20px;
+      border-radius: 14px;
+    }
+    .content-card h3 {
+      font-size: 16px;
+      color: #38bdf8;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .content-card ul {
+      list-style-type: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .content-card li {
+      font-size: 13px;
+      color: #d1d5db;
+      line-height: 1.5;
+      position: relative;
+      padding-left: 18px;
+    }
+    .content-card li::before {
+      content: "•";
+      color: var(--accent);
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+    .workflow-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: auto 0;
+    }
+    .wf-step {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      padding: 16px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .wf-badge {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--accent);
+    }
+    .wf-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .wf-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+    .footer-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    @media print {
+      body { padding: 0; background: white; color: black; }
+      .controls { display: none; }
+      .slide {
+        page-break-after: always;
+        border: none;
+        box-shadow: none;
+        background: white;
+        color: black;
+        margin: 0;
+        width: 100%;
+        height: 100vh;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="controls">
+    <span>ENTROPILO Slide Deck (8 Slides)</span>
+    <button onclick="window.print()">🖨️ Export to PDF / Print</button>
+  </div>
+
+  <div class="slide-deck">
+
+    <!-- Slide 1: Title & Overview -->
+    <section class="slide">
+      <div class="slide-header">
+        <span class="tag">Project Presentation</span>
+        <span class="slide-num">Slide 1 / 8</span>
+      </div>
+      <div>
+        <h1 style="background: linear-gradient(135deg, #fff 40%, #818cf8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+          ENTROPILO 🪞
+        </h1>
+        <h2>A Goal-Aware Browser Intervention Against Doomscrolling</h2>
+        <p class="lead">
+          Interrupting compulsive feed loops by contrasting a user’s declared intention with real-time observed browsing behavior — without punitive lockouts.
+        </p>
+      </div>
+      <div class="content-grid">
+        <div class="content-card">
+          <h3>🎯 Core Philosophy</h3>
+          <p style="font-size: 13px; color: #cbd5e1; line-height: 1.5;">
+            "Time spent is not the same as attention wasted." Five minutes of intentional learning is valuable; five minutes of passive scroll trance is not.
+          </p>
+        </div>
+        <div class="content-card">
+          <h3>⚡ Technical Foundation</h3>
+          <p style="font-size: 13px; color: #cbd5e1; line-height: 1.5;">
+            Manifest V3 Chrome Extension powered by an on-device Fugue Engine, reversible progressive CSS entropy, and contextual in-feed behavioral mirrors.
+          </p>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <span>Team Entropilo</span>
+        <span>Zero Cloud Telemetry • 100% Local Inference</span>
+      </div>
+    </section>
+
+    <!-- Slide 2: Problem / Opportunity -->
+    <section class="slide">
+      <div class="slide-header">
+        <span class="tag">Problem & Opportunity</span>
+        <span class="slide-num">Slide 2 / 8</span>
+      </div>
+      <div>
+        <h2>The Digital Wellbeing Dilemma</h2>
+        <p class="lead">Conventional productivity tools treat all browsing identically, failing to support purposeful work on modern social feeds.</p>
+      </div>
+      <div class="content-grid">
+        <div class="content-card" style="border-left: 4px solid var(--danger);">
+          <h3 style="color: #f87171;">⚠️ Why Existing Tools Fail</h3>
+          <ul>
+            <li><strong>Blind Timers:</strong> Lock out platforms after 15 mins, interrupting critical research alongside distraction.</li>
+            <li><strong>Feed Blockers:</strong> Strip feeds completely, removing announcements, discussions, and updates.</li>
+            <li><strong>Opening Delays:</strong> Introduce a 5-second pause at site entry, but do nothing once a user drifts 10 minutes later.</li>
+            <li><strong>Reactance:</strong> Users bypass or uninstall punitive blockers when they feel restricted.</li>
+          </ul>
+        </div>
+        <div class="content-card" style="border-left: 4px solid var(--success);">
+          <h3 style="color: #34d399;">💡 The Entropilo Opportunity</h3>
+          <ul>
+            <li><strong>Behavior-Aware:</strong> Responds to <em>how</em> a person is browsing, rather than simply how long they have stayed.</li>
+            <li><strong>Metacognitive Mirror:</strong> Holds up the user’s own stated goal against their current actions.</li>
+            <li><strong>Graceful Friction:</strong> Uses subtle sensory desaturation to reduce dopamine feedback without breaking functionality.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <span>Opportunity: Distinguishing intention from automation</span>
+        <span>Privacy-First Heuristics</span>
+      </div>
+    </section>
+
+    <!-- Slide 3: Proposed Solution -->
+    <section class="slide">
+      <div class="slide-header">
+        <span class="tag">Proposed Solution</span>
+        <span class="slide-num">Slide 3 / 8</span>
+      </div>
+      <div>
+        <h2>The Entropilo Trinity</h2>
+        <p class="lead">An end-to-end cognitive loop that preserves intentional browsing and interrupts passive trance states.</p>
+      </div>
+      <div class="content-grid" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="content-card">
+          <h3>1. Intent Contract</h3>
+          <p style="font-size: 13px; color: #cbd5e1; line-height: 1.5; margin-bottom: 8px;">
+            A lightweight prompt when opening YouTube or X/Twitter asks: <em>"What is your intention for this visit?"</em>
+          </p>
+          <span style="font-size: 11px; color: #94a3b8;">Saves declared goal in local tab memory with preset or custom text.</span>
+        </div>
+        <div class="content-card">
+          <h3>2. Fugue Engine</h3>
+          <p style="font-size: 13px; color: #cbd5e1; line-height: 1.5; margin-bottom: 8px;">
+            A local heuristic monitoring rolling scroll velocity, reading dwell time pauses, and interaction density.
+          </p>
+          <span style="font-size: 11px; color: #94a3b8;">Computes real-time Zombification Score (0-100) with warm-up grace gates.</span>
+        </div>
+        <div class="content-card">
+          <h3>3. Behavioral Mirror</h3>
+          <p style="font-size: 13px; color: #cbd5e1; line-height: 1.5; margin-bottom: 8px;">
+            Injects an in-feed reflection card comparing declared intent with measured telemetry: <em>"Scrolled 45 posts, clicked 0 links."</em>
+          </p>
+          <span style="font-size: 11px; color: #94a3b8;">Provides a conscious choice to refocus or exit cleanly.</span>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <span>Non-Punitive • Reversible • Metacognitive</span>
+        <span>Dynamic Site Adapters</span>
+      </div>
+    </section>
+
+    <!-- Slide 4: Workflow -->
+    <section class="slide">
+      <div class="slide-header">
+        <span class="tag">System Workflow</span>
+        <span class="slide-num">Slide 4 / 8</span>
+      </div>
+      <div>
+        <h2>The Adaptive Intervention Cycle</h2>
+        <p class="lead">How signals flow seamlessly from initial intent to mindful decision making.</p>
+      </div>
+      <div class="workflow-row">
+        <div class="wf-step">
+          <span class="wf-badge">STEP 1</span>
+          <span class="wf-title">Declare Intent</span>
+          <p class="wf-desc">User enters feed and sets goal: <em>"Watch tutorial"</em> or <em>"Check hackathon news"</em>.</p>
+        </div>
+        <div class="wf-step">
+          <span class="wf-badge">STEP 2</span>
+          <span class="wf-title">Signal Tracking</span>
+          <p class="wf-desc">rAF samples scroll speed. Pauses to read count as positive dwell. Video clicks reward clarity.</p>
+        </div>
+        <div class="wf-step">
+          <span class="wf-badge">STEP 3</span>
+          <span class="wf-title">Progressive Entropy</span>
+          <p class="wf-desc">If rapid scrolling continues without clicks, page desaturates (30% -> 65% -> 85% grayscale).</p>
+        </div>
+        <div class="wf-step">
+          <span class="wf-badge">STEP 4</span>
+          <span class="wf-title">Mirror & Reset</span>
+          <p class="wf-desc">In-feed card prompts reflection. User clicks 'Refocus & Reset' to immediately restore full clarity.</p>
+        </div>
+      </div>
+      <div class="content-card" style="margin-top: 10px;">
+        <h3 style="font-size: 13px;">🛡️ Warm-Up Grace Period Protection</h3>
+        <p style="font-size: 12px; color: #9ca3af;">
+          Initial 40-second grace window prevents false triggers when a user first lands and skims the top of the feed.
+        </p>
+      </div>
+      <div class="footer-bar">
+        <span>Closed Feedback Loop</span>
+        <span>Zero Page Reloads Required</span>
+      </div>
+    </section>
+
+    <!-- Slide 5: Features -->
+    <section class="slide">
+      <div class="slide-header">
+        <span class="tag">Product Features</span>
+        <span class="slide-num">Slide 5 / 8</span>
+      </div>
+      <div>
+        <h2>Engineered for Focus, Not Lockouts</h2>
+        <p class="lead">A complete suite of wellbeing mechanics and developer tools.</p>
+      </div>
+      <div class="content-grid">
+        <div class="content-card">
+          <h3>🧠 Behavioral Fugue Engine</h3>
+          <ul>
+            <li>Calculates rolling drift index via scroll velocity, dwell duration, and clicks.</li>
+            <li>Score decays when purposeful reading or link navigation is detected.</li>
+            <li>Three sensitivity modes: Gentle, Balanced, Strict.</li>
+          </ul>
+        </div>
+        <div class="content-card">
+          <h3>🎨 Progressive Visual Entropy</h3>
+          <ul>
+            <li>Dynamic CSS filter degradation (grayscale, muted contrast, subtle media blur).</li>
+            <li>100% reversible in 400ms without touching or deleting host DOM nodes.</li>
+            <li>Soft vignette alerts the peripheral vision at critical thresholds.</li>
+          </ul>
+        </div>
+        <div class="content-card">
+          <h3>🌐 Multi-Platform Adapters</h3>
+          <ul>
+            <li><strong>YouTube:</strong> Adapts to Home feed, Watch page, Shorts, and SPA navigation.</li>
+            <li><strong>X/Twitter:</strong> Seamless in-timeline card insertion in primary column.</li>
+            <li><strong>Generic:</strong> Fallback compatibility with standard feed layouts.</li>
+          </ul>
+        </div>
+        <div class="content-card">
+          <h3>🛠️ Developer HUD & Simulator</h3>
+          <ul>
+            <li><strong>Alt+Shift+E HUD:</strong> Live telemetry overlay for judge demos & manual triggers.</li>
+            <li><strong>EchoNet Sandbox:</strong> Built-in mock feed for offline testing without accounts.</li>
+            <li><strong>Action Popup:</strong> Live score gauge, goal editor, and fast demo speed toggle.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <span>Production-Grade Chrome MV3 Architecture</span>
+        <span>Dark-Mode Isolated UI</span>
+      </div>
+    </section>
+
+    <!-- Slide 6: Technologies Used -->
+    <section class="slide">
+      <div class="slide-header">
+        <span class="tag">Technologies Used</span>
+        <span class="slide-num">Slide 6 / 8</span>
+      </div>
+      <div>
+        <h2>Modern, Lightweight & Zero-Dependency</h2>
+        <p class="lead">Built entirely on native browser APIs to ensure minimal resource overhead and absolute privacy.</p>
+      </div>
+      <div class="content-grid">
+        <div class="content-card">
+          <h3>📦 Extension Framework</h3>
+          <ul>
+            <li><strong>Chrome Manifest V3:</strong> Latest modern extension standard with background service workers.</li>
+            <li><strong>Storage API:</strong> Session & local tab synchronization with zero cloud transmission.</li>
+            <li><strong>ActiveTab & Badge APIs:</strong> Reactive extension toolbar badge color & score indication.</li>
+          </ul>
+        </div>
+        <div class="content-card">
+          <h3>⚡ Content Script Architecture</h3>
+          <ul>
+            <li><strong>requestAnimationFrame:</strong> High-precision, jitter-free scroll velocity sampling.</li>
+            <li><strong>IntersectionObserver:</strong> Accurate tracking of unique post views and impressions.</li>
+            <li><strong>MutationObserver:</strong> Dynamic infinite-scroll feed container attachment.</li>
+          </ul>
+        </div>
+        <div class="content-card">
+          <h3>🎨 CSS & Isolation Layer</h3>
+          <ul>
+            <li><strong>Namespaced Scopes:</strong> Resets styling to prevent conflict with YouTube/Twitter styles.</li>
+            <li><strong>Dynamic CSS Injections:</strong> Non-destructive inline stylesheets for filter transitions.</li>
+            <li><strong>Polymer & SPA Hooking:</strong> Listens to <code>yt-navigate-finish</code> on YouTube.</li>
+          </ul>
+        </div>
+        <div class="content-card">
+          <h3>🧪 Verification & Tooling</h3>
+          <ul>
+            <li><strong>Node.js Automated Test Suite:</strong> Verified scoring models, time-gates, and decay math.</li>
+            <li><strong>Pure Python Asset Generator:</strong> Programmatic PNG icon generation without external libraries.</li>
+            <li><strong>EchoNet Test Engine:</strong> Built-in procedural social feed generator.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bar">
+        <span>&lt; 100 KB Total Size</span>
+        <span>&lt; 1ms Execution Latency</span>
+      </div>
+    </section>
+
+    <!-- Slide 7: Innovation, Feasibility & Impact -->
+    <section class="slide">
+      <div class="slide-header">
+        <span class="tag">Innovation & Feasibility</span>
+        <span class="slide-num">Slide 7 / 8</span>
+      </div>
+      <div>
+        <h2>A Feasible Paradigm Shift in Digital Wellbeing</h2>
+        <p class="lead">Moving beyond rigid restrictions toward self-awareness and sustainable digital habits.</p>
+      </div>
+      <div class="content-grid">
+        <div class="content-card">
+          <h3>✨ Core Innovation</h3>
+          <ul>
+            <li><strong>Contextual Feedback:</strong> Contrasting declared intent with observed activity replaces generic warnings with personal accountability.</li>
+            <li><strong>Sensory vs Destructive:</strong> Degrades interface comfort instead of crashing or blocking the page.</li>
+            <li><strong>Metacognition:</strong> Encourages conscious reflection rather than triggering evasive bypasses.</li>
+          </ul>
+        </div>
+        <div class="content-card">
+          <h3>📈 Feasibility & Viability</h3>
+          <ul>
+            <li><strong>Zero Server Cost:</strong> Operates entirely client-side with zero cloud infrastructure or API fees.</li>
+            <li><strong>High Maintainability:</strong> Clean adapter pattern isolates platform-specific DOM variations.</li>
+            <li><strong>Frictionless Adoption:</strong> No signup, no account, works out of the box in under 10 seconds.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="content-card" style="margin-top: 10px;">
+        <h3 style="color: #a78bfa;">🚀 Future Vision</h3>
+        <p style="font-size: 13px; color: #cbd5e1; line-height: 1.5;">
+          Expansion to Instagram, LinkedIn, and TikTok web feeds; user-customizable entropy styles (e.g. grayscale vs typography fuzzing); and weekly privacy-preserved self-awareness reports.
+        </p>
+      </div>
+      <div class="footer-bar">
+        <span>Sustainable Digital Wellbeing</span>
+        <span>Self-Regulation Over Enforcement</span>
+      </div>
+    </section>
+
+    <!-- Slide 8: MVP Snapshots, GitHub & Demo -->
+    <section class="slide">
+      <div class="slide-header">
+        <span class="tag">MVP & Repository</span>
+        <span class="slide-num">Slide 8 / 8</span>
+      </div>
+      <div>
+        <h2>Try Entropilo Today</h2>
+        <p class="lead">Fully functional MVP ready for evaluation and live hackathon demonstration.</p>
+      </div>
+      <div class="content-grid">
+        <div class="content-card">
+          <h3>🎮 Interactive Live Demo</h3>
+          <ul>
+            <li><strong>Option A (Simulator):</strong> Click extension icon -> <em>"Open EchoNet Feed Simulator"</em> for instant offline trial.</li>
+            <li><strong>Option B (Live Feed):</strong> Open <a href="https://youtube.com" style="color: #38bdf8;">YouTube</a> or <a href="https://x.com" style="color: #38bdf8;">X/Twitter</a> and declare intention.</li>
+            <li><strong>Shortcut:</strong> Press <code>Alt + Shift + E</code> to toggle the developer HUD and test instant triggers.</li>
+          </ul>
+        </div>
+        <div class="content-card">
+          <h3>🔗 GitHub Repository</h3>
+          <ul>
+            <li><strong>Repository:</strong> <a href="https://github.com/himanshushukla/Entropilo" style="color: #38bdf8;">github.com/himanshushukla/Entropilo</a></li>
+            <li><strong>Full Test Suite:</strong> <code>node tests/run-all-tests.js</code> (100% passing tests).</li>
+            <li><strong>Install in Chrome:</strong> Open <code>chrome://extensions</code>, toggle Developer Mode, click <em>Load unpacked</em>.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="content-card" style="margin-top: 10px; background: rgba(99, 102, 241, 0.08); border-color: rgba(99, 102, 241, 0.3);">
+        <h3 style="color: #818cf8;">🏆 60-Second Hackathon Pitch Summary</h3>
+        <p style="font-size: 13px; color: #e2e8f0; line-height: 1.5;">
+          Entropilo gives autonomy back to users. By declaring purpose upon entering high-stimulus feeds and subtly reflecting behavioral drift, we break mindless doomscrolling without ever breaking the websites you rely on.
+        </p>
+      </div>
+      <div class="footer-bar">
+        <span>GitHub: himanshushukla/Entropilo</span>
+        <span>Ready for Deployment</span>
+      </div>
+    </section>
+
+  </div>
+
+</body>
+</html>
